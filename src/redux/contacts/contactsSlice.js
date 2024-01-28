@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 import { fetchContacts, addContact, deleteContact } from './operations';
 
@@ -42,21 +42,6 @@ export const contactsSlice = createSlice({
       })
       .addCase(deleteContact.rejected, handleRejected);
   },
-
-  // reducers: {
-  // addContact: {
-  //   reducer: (state, action) => {
-  //     state.push(action.payload);
-  //   },
-  //   prepare: ({ name, number }) => {
-  //     const id = nanoid();
-  //     return { payload: { id, name, number } };
-  //   },
-  // },
-  // deleteContact: (state, action)=> {
-  //   return state.filter(contact => contact.id !== action.payload);
-  // },
-  // },
 });
 
 export const contactsReducer = contactsSlice.reducer;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Spinner } from 'components/Spinner/Spinner';
 import { Container } from './ContactListItem.styled';
 import { toast } from 'react-hot-toast';
 import { deleteContact } from '../../redux/contacts/operations';
