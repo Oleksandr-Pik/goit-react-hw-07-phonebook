@@ -1,23 +1,33 @@
 import React from 'react';
 import ContactListItem from 'components/ContactListItem';
-import { toast } from 'react-hot-toast';
-import { deleteContact } from '../../redux/contacts/contactsSlice';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsList, getContactsFilter } from '../../redux/selectors';
+import {
+  selectContactsList,
+  selectContactsFilter,
+  selectIsLoading,
+  selectError,
+} from '../../redux/selectors';
+
+import { useEffect } from 'react';
+import { fetchContacts } from '../../redux/contacts/operations';
+import { Spinner } from 'components/Spinner/Spinner';
 
 const ContactList = () => {
-  const contacts = useSelector(getContactsList);
-  const filter = useSelector(getContactsFilter);
-
   const dispatch = useDispatch();
 
-  const handleDeleteContact = contactId => {
-    dispatch(deleteContact(contactId));
-    toast.error('Delete contact successfully');
-  };
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const contacts = useSelector(selectContactsList);
+  const filter = useSelector(selectContactsFilter);
+  const isFetching = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
+    console.log('contacts', contacts);
     return contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalizedFilter)
     );
@@ -27,13 +37,19 @@ const ContactList = () => {
 
   return (
     <>
+      {isFetching && <Spinner size={36} />}
+      {error && (
+        <p>
+          Oops, something went wrong! <p>${error}</p>
+        </p>
+      )}
       {visibleContacts.length > 0 ? (
         <ul>
           {visibleContacts.map(contact => (
             <li key={contact.id}>
               <ContactListItem
                 contact={contact}
-                onDeleteContact={handleDeleteContact}
+                // onDeleteContact={handleDeleteContact}
               />
             </li>
           ))}

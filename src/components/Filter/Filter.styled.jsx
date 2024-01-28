@@ -10,9 +10,11 @@ export const Input = styled.input`
   /* margin-bottom: 20px; */
   padding: 4px 14px;
   border-radius: 5px;
-
+  transition: all 0.3s ease-out;
+;
   &:hover,
   &:focus {
-    outline: 1px solid blue;
+    border: 2px solid #fabb18;
+    outline: none;
   }
 `;

@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { Button, Form, Input } from './ContactForm.styled';
 
 import { toast } from 'react-hot-toast';
-import { addContact } from '../../redux/contacts/contactsSlice';
+import { addContact } from '../../redux/contacts/operations';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsList } from '../../redux/selectors';
+import { selectContactsList, selectIsLoading } from '../../redux/selectors';
 
 const ContactForm = () => {
-  const contacts = useSelector(getContactsList);
-
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContactsList);
+  const isFetching = useSelector(selectIsLoading);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -75,7 +75,7 @@ const ContactForm = () => {
         placeholder="Enter number"
         value={number}
       />
-      <Button type="submin">Add contact</Button>
+      <Button type="submin" disabled={isFetching} >Add contact</Button>
     </Form>
   );
 };

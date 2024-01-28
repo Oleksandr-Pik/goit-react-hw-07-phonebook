@@ -7,6 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5
 }
 
 code {
@@ -16,12 +17,17 @@ code {
 
 button {
   cursor: pointer;
-  padding: 4px 14px;
+  padding: 5px 15px;
   border-radius: 5px;
+  transition: all 0.3s ease-out;
+  background-color: rgba(250, 187, 24, 0.75);
+  box-shadow: 5px 5px 5px -3px rgb(164, 164, 164);
+  border: none;
 }
 
 button:hover,
 button:focus {
-  background-color: blue;
+  box-shadow: 8px 8px 8px -3px rgb(164, 164, 164);
+  background-color: rgb(250, 187, 24);
   color: #FFF;
 }
